@@ -1,0 +1,35 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    container_name: wemood_admin_frontend
+    restart: unless-stopped
+    networks:
+      - wemood-admin-net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: wemood_admin_caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - wemood-admin-net
+    depends_on:
+      - frontend
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  wemood-admin-net:
+    driver: bridge

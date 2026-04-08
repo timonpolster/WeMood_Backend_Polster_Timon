@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply font-sans min-h-screen; }
+  
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-wm-surface; }
+  ::-webkit-scrollbar-thumb { @apply bg-wm-border rounded-full; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2
+           font-medium text-sm rounded-lg transition-all
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-wm-bg
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary { @apply btn bg-wm-primary text-white hover:bg-wm-primary-hover focus:ring-wm-primary; }
+  .btn-secondary { @apply btn bg-wm-surface-light text-wm-text border border-wm-border hover:border-wm-text-dim; }
+  .btn-danger { @apply btn bg-wm-danger/10 text-wm-danger hover:bg-wm-danger hover:text-white; }
+  .btn-ghost { @apply btn text-wm-text-muted hover:text-wm-text hover:bg-wm-surface-light; }
+
+  .input {
+    @apply w-full px-3 py-2 bg-wm-surface border border-wm-border rounded-lg
+           text-wm-text placeholder-wm-text-dim
+           focus:outline-none focus:ring-2 focus:ring-wm-primary focus:border-transparent;
+  }
+  .input-error { @apply border-wm-danger focus:ring-wm-danger; }
+  .label { @apply block text-sm font-medium text-wm-text-muted mb-1; }
+
+  .card { @apply bg-wm-surface border border-wm-border rounded-xl; }
+
+  .badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium; }
+  .badge-success { @apply badge bg-wm-success/20 text-wm-success; }
+  .badge-warning { @apply badge bg-wm-warning/20 text-wm-warning; }
+  .badge-danger { @apply badge bg-wm-danger/20 text-wm-danger; }
+  .badge-neutral { @apply badge bg-wm-surface-light text-wm-text-muted; }
+
+  .tag { @apply inline-block px-2 py-0.5 text-xs rounded bg-wm-primary/10 text-wm-accent; }
+}
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.2s; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
